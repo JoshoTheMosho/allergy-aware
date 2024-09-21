@@ -53,6 +53,9 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+      <p>
+        This is a list of countries from the database, hosted by supabase:
+      </p>
       <ul>
         {countries.map((country) => (
           <li key={country.id}>{country.name}</li>
