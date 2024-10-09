@@ -1,4 +1,4 @@
-import LoginForm from '../components/Login/Login';
+import LoginForm from '../components/login/Login';
 import { Container, Box, Typography } from '@mui/material';
 
 const LoginPage = ({ supabase }) => {
