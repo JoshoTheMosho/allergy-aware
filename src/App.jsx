@@ -1,68 +1,33 @@
-import { useEffect, useState } from 'react'
-import { createClient } from "@supabase/supabase-js";
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { createClient } from '@supabase/supabase-js';
+import LandingPage from './pages/LandingPage';
+import LoginPage from './pages/LoginPage';
+import SearchPage from './pages/SearchPage';
+import EditPage from './pages/EditPage';
+import Navbar from './components/common/Navbar';
+import Footer from './components/common/Footer';
+import './App.css';
 
+// Initialize Supabase client
 const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL, 
-  import.meta.env.VITE_SUPABASE_SERVICE_ROLE_KEY
+    import.meta.env.VITE_SUPABASE_URL,
+    import.meta.env.VITE_SUPABASE_SERVICE_ROLE_KEY
 );
 
 function App() {
-  const [count, setCount] = useState(0)
+    return (
+        <Router>
+            <Navbar />
+            <Routes>
+                <Route path="/" element={<LandingPage supabase={supabase} />} />
+                <Route path="/login" element={<LoginPage supabase={supabase} />} />
+                <Route path="/search" element={<SearchPage supabase={supabase} />} />
+                <Route path="/edit" element={<EditPage supabase={supabase} />} />
+            </Routes>
+            <Footer />
+        </Router>
+    );
 
-  const [countries, setCountries] = useState([]);
-
-  useEffect(() => {
-    getCountries();
-  }, []);
-
-  async function getCountries() {
-    const { data, error } = await supabase.from("countries").select("id, name");
-
-    if (error) {
-      console.error("Error fetching countries:", error);
-      return;
-    }
-  
-    if (data) {
-      setCountries(data);
-    }
-  }
-
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-      <p>
-        This is a list of countries from the database, hosted by supabase:
-      </p>
-      <ul>
-        {countries.map((country) => (
-          <li key={country.id}>{country.name}</li>
-        ))}
-      </ul>
-    </>
-  )
 }
 
 export default App
