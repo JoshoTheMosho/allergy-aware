@@ -25,23 +25,32 @@ async def search_ingredients(query: str = Query(..., title="Query", description=
         HTTPException: If an error occurs while processing the request.
     """
     try:
-        # Query the Supabase table "dishes" for matching ingredients or allergens
-        result = await supabase.table("dishes")\
+        
+        # Step 1: Query the Ingredients table based on the ingredient name or allergen
+        ingredient_result = await supabase.table("ingredients")\
             .select("*")\
-            .or_(f"ingredients.ilike.%{query}%,allergens.ilike.%{query}%")\
-            .eq("restaurant_id", user.id)\
+            .or_(f"name.ilike.%{query}%,allergen.ilike.%{query}%")\
+            .eq("restaurant_id", user.user.id)\
             .execute()
-        
-        # Check for errors in the result
-        if result.error:
-            raise HTTPException(status_code=500, detail=f"An error occurred: {result.error}")
-        
-        # Return an empty list if no data is found
-        if not result.data:
-            return []
 
-        # Return the list of dishes
-        return [Dish(**dish) for dish in result.data]
+         # Extract the list of ingredients found
+        ingredients_data = ingredient_result.data
+        if not ingredients_data:
+            return []
+        
+         # Step 2: Get a list of ingredient names to find matching dishes
+        ingredient_names = [ingredient['name'] for ingredient in ingredients_data]
+
+        # Step 3: Query the Dishes table to find dishes containing these ingredients
+        dish_result = await supabase.table("dishes")\
+            .select("*")\
+            .in_("ingredient", ingredient_names)\
+            .eq("restaurant_id", user.user.id)\
+            .execute()
+
+         # Return the list of dishes if found, otherwise an empty list
+        return [Dish(**dish) for dish in dish_result.data] if dish_result.data else []
+    
     except Exception as e:
         # Raise an HTTP 500 error if an exception occurs
         raise HTTPException(status_code=500, detail=str(e))
