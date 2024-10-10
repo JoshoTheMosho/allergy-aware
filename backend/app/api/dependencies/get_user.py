@@ -19,7 +19,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
         HTTPException: If the user is not authenticated or the token is invalid.
     """
     # Retrieve the user from Supabase using the provided token
-    user = await supabase.auth.api.get_user(token)
+    user = await supabase.auth.get_user(token)
 
     # If the user is not found, raise an HTTP 401 Unauthorized exception
     if not user:
