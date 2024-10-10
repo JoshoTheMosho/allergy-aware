@@ -54,7 +54,7 @@ async def search_ingredients(query: str = Query(..., title="Query", description=
         # Step 4: Query the Dishes table to find dishes containing these ingredients
         dish_result = supabase.table("dishes")\
             .select("*")\
-            .in_("ingredients", ingredient_names)\
+            .in_("ingredient", ingredient_names)\
             .eq("restaurant_id", restaurant_id)\
             .execute()
         
