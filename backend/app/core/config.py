@@ -10,7 +10,11 @@ Attributes:
 """
 
 import os
+from dotenv import load_dotenv
 from supabase import create_client, Client
+
+# Load environment variables from a .env file
+load_dotenv()
 
 # Retrieve the Supabase URL and key from environment variables
 url: str = os.getenv("SUPABASE_URL") 
