@@ -19,7 +19,7 @@ async def login_user(email: str = Body(...), password: str = Body(...)):
         HTTPException: If authentication fails.
     """
     # Authenticate the user with Supabase
-    response, error = await supabase.auth.sign_in_with_password(email=email, password=password)
+    response, error = await supabase.auth.sign_in_with_password({"email": email, "password": password})
     if error:
         raise HTTPException(status_code=400, detail=str(error.message))
     
