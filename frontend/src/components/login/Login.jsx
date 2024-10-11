@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { TextField, Button, Box, Typography } from '@mui/material';
 import config from '../../../config';
+import process from 'process';
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
@@ -10,6 +11,9 @@ const LoginForm = () => {
     const handleLogin = async (e) => {
         e.preventDefault(); // Prevent form submission
         setError('');
+
+        console.log("Import meta env: ", import.meta.env)
+        console.log("Process env:", process.env)
 
         const response = await fetch(`${config.backendUrl}/auth/login`, {
             method: 'POST',
