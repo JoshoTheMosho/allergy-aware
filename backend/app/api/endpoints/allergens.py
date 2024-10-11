@@ -30,12 +30,12 @@ def search_ingredients(query: str = Query(..., title="Query", description="Searc
         user_result = supabase.table("users")\
             .select("restaurant_id")\
             .eq("id", user.user.id)\
-            .maybe_single()\
             .execute()
 
         print("User Result:", user_result.data)
 
-        restaurant_id = user_result.data["restaurant_id"]
+        #restaurant_id = user_result.data["restaurant_id"]
+        restaurant_id = user_result.data[0]['restaurant_id']
 
         print("Restaurant ID:", restaurant_id)
 
