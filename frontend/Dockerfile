@@ -1,6 +1,9 @@
 # Stage 1: Build the React app
 FROM node:20 AS build
 
+# Set the environment variables we want to access
+ARG VITE_BACKEND_URL
+
 # Set the working directory inside the container
 WORKDIR /code
 
