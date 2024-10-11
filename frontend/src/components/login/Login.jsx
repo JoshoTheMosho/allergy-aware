@@ -11,6 +11,8 @@ const LoginForm = () => {
         e.preventDefault(); // Prevent form submission
         setError('');
 
+        console.log("Our backend URL is: ", config.backendUrl, " with the config being ", config);
+
         const response = await fetch(`${config.backendUrl}/auth/login`, {
             method: 'POST',
             headers: {
