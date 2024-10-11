@@ -21,6 +21,9 @@ if is_development:
 else:
     frontend_url = os.getenv("FRONTEND_URL")
 
+    print(is_development)
+    print(frontend_url)
+
     app.add_middleware(
         CORSMiddleware,
         allow_origins=[frontend_url],  # Allow your frontend URL only
@@ -28,6 +31,7 @@ else:
         allow_methods=["*"],  # Allow all HTTP methods
         allow_headers=["*"],  # Allow all headers
     )
+
 
 # Include the API router to handle all the routes defined in the api_router
 app.include_router(api_router)

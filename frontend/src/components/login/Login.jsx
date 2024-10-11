@@ -11,10 +11,8 @@ const LoginForm = () => {
         e.preventDefault(); // Prevent form submission
         setError('');
 
-        let url = `${config.backendUrl}/auth/login`;
-        console.log("Fetching from", url);
 
-        const response = await fetch(url, {
+        const response = await fetch(`${config.backendUrl}/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
