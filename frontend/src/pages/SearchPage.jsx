@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import SearchIngredients from '../components/searchIngredients/SearchIngredients';
 import { Grid2, Card, CardContent, Typography } from '@mui/material';
+import config from '../../config';
 
-const SearchPage = ({ supabase }) => {
+const SearchPage = () => {
     const [results, setResults] = useState([]);
     const [token, setToken] = useState('');
 
@@ -35,7 +36,7 @@ const SearchPage = ({ supabase }) => {
         }
 
         try {
-            const response = await axios.get(`http://localhost:8000/allergens/search/`, {
+            const response = await axios.get(`${config.backendUrl}/allergens/search/`, {
                 headers: {
                     Authorization: `Bearer ${token}` //token
                 },
