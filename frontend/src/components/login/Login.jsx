@@ -11,11 +11,10 @@ const LoginForm = () => {
         e.preventDefault(); // Prevent form submission
         setError('');
 
-        console.log(`${config.backendUrl}`);
+        let url = `${config.backendUrl}/auth/login`;
+        console.log("Fetching from", url);
 
-        console.log(`${import.meta.env}`);
-
-        const response = await fetch(`${config.backendUrl}/auth/login`, {
+        const response = await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
