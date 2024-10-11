@@ -5,7 +5,7 @@ from fastapi.security import OAuth2PasswordBearer
 # Define the OAuth2 scheme for token authentication
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
 
-async def get_current_user(token: str = Depends(oauth2_scheme)):
+def get_current_user(token: str = Depends(oauth2_scheme)):
     """
     Retrieve the current authenticated user based on the provided token.
 
