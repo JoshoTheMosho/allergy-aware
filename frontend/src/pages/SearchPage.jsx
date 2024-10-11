@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import SearchIngredients from '../components/searchIngredients/SearchIngredients';
-import { Grid, Card, CardContent, Typography } from '@mui/material';
+import { Grid2, Card, CardContent, Typography } from '@mui/material';
 
 const SearchPage = ({ supabase }) => {
     const [results, setResults] = useState([]);
@@ -57,9 +57,9 @@ const SearchPage = ({ supabase }) => {
             {/* Display search results */}
             <div style={{ marginTop: '20px' }}>
                 {results.length > 0 ? (
-                    <Grid container spacing={2}>
+                    <Grid2 container spacing={2}>
                         {results.map((result, index) => (
-                            <Grid item xs={12} sm={6} md={4} key={`${result.name}-${result.ingredient}-${index}`}>
+                            <Grid2 item xs={12} sm={6} md={4} key={`${result.name}-${result.ingredient}-${index}`}>
                                 <Card style={{ backgroundColor: '#f5f5f5', borderRadius: '8px' }}>
                                     <CardContent>
                                         <Typography variant="h6" component="div">
@@ -70,9 +70,9 @@ const SearchPage = ({ supabase }) => {
                                         </Typography>
                                     </CardContent>
                                 </Card>
-                            </Grid>
+                            </Grid2>
                         ))}
-                    </Grid>
+                    </Grid2>
                 ) : (
                     <Typography variant="body1" color="textSecondary" style={{ textAlign: 'center', marginTop: '20px' }}>
                         No results found.
