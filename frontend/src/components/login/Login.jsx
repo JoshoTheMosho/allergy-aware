@@ -9,9 +9,8 @@ const LoginForm = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault(); // Prevent form submission
-        setError(''); // Clear previous error message
+        setError('');
 
-        // Make a call to your backend login endpoint
         const response = await fetch(`${config.backendUrl}/auth/login`, {
             method: 'POST',
             headers: {
@@ -26,7 +25,7 @@ const LoginForm = () => {
         }
 
         const data = await response.json();
-        console.log('Response from /auth/login:', data);
+        // console.log('Response from /auth/login:', data);
 
         // Redirect to the search page or handle login success
         window.location.href = '/search'; // Redirect after successful login
