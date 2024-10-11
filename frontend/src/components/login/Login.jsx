@@ -11,6 +11,10 @@ const LoginForm = () => {
         e.preventDefault(); // Prevent form submission
         setError('');
 
+        console.log(`${config.backendUrl}`);
+
+        console.log(`${import.meta.env}`);
+
         const response = await fetch(`${config.backendUrl}/auth/login`, {
             method: 'POST',
             headers: {
