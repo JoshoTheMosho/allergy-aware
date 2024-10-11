@@ -13,7 +13,7 @@ const LoginForm = () => {
 
         console.log("Our backend URL is: ", config.backendUrl, " with the config being ", config);
 
-        const response = await fetch(`${config.backendUrl}/auth/login`, {
+        const response = await fetch(`http://backend.railway.internal/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
