@@ -26,9 +26,8 @@ const LoginForm = () => {
 
         const data = await response.json();
 
-        localStorage.setItem('access_token', data.response.session.accessToken);
-        localStorage.setItem('refresh_token', data.response.session.refreshToken);
-
+        localStorage.setItem('access_token', data.response.session.access_token);
+        localStorage.setItem('refresh_token', data.response.session.refresh_token);
 
         // Redirect to the search page or handle login success
         window.location.href = '/search'; // Redirect after successful login
