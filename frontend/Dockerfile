@@ -25,6 +25,15 @@ FROM nginx:alpine
 # Copy the build output to the NGINX html directory
 COPY --from=build /code/dist /usr/share/nginx/html
 
+# Copy the NGINX template configuration
+COPY nginx.conf.template /etc/nginx/nginx.conf.template
+
+# Set the environment variable for backend URL
+ENV BACKEND_URL=${VITE_BACKEND_URL}
+
+# Generate the NGINX configuration file with substituted variables
+RUN envsubst < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
+
 # Expose port 80
 EXPOSE 80
 
