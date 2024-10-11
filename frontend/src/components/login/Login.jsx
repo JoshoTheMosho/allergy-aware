@@ -1,15 +1,17 @@
 import { useState } from 'react';
-import { TextField, Button, Box, Typography } from '@mui/material';
+import { TextField, Button, Box, Typography, CircularProgress } from '@mui/material';
 import config from '../../../config';
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
     const handleLogin = async (e) => {
         e.preventDefault(); // Prevent form submission
         setError('');
+        setLoading(true);
 
         const response = await fetch(`${config.backendUrl}/auth/login`, {
             method: 'POST',
@@ -18,6 +20,8 @@ const LoginForm = () => {
             },
             body: JSON.stringify({ "email": email, "password": password }),
         });
+
+        setLoading(false);
 
         if (!response.ok) {
             setError("Incorrect email or password.");
@@ -124,8 +128,9 @@ const LoginForm = () => {
                     color="primary"
                     fullWidth
                     sx={{ mt: 2 }}
+                    disabled={loading}
                 >
-                    Login
+                    {loading ? <CircularProgress size={24} /> : 'Login'}
                 </Button>
             </form>
         </Box>

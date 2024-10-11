@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { TextField, Button, Box, Typography } from '@mui/material';
+import { TextField, Button, Box, Typography, CircularProgress } from '@mui/material';
 
-const SearchIngredients = ({ onSearch }) => {
+const SearchIngredients = ({ onSearch, loading }) => {
     // State to store the user's search input
     const [query, setQuery] = useState('');
 
@@ -28,12 +28,13 @@ const SearchIngredients = ({ onSearch }) => {
                 onChange={handleInputChange}
                 sx={{ mb: 2, width: '300px' }}
             />
-            <Button 
-                variant="contained" 
-                color="primary" 
+            <Button
+                variant="contained"
+                color="primary"
                 onClick={handleSearchClick}
+                disabled={loading}
             >
-                Search
+                {loading ? <CircularProgress size={24} /> : 'Search'}
             </Button>
         </Box>
     );
