@@ -1,12 +1,11 @@
 import LoginForm from '../components/login/Login';
-import { Container, Box, Typography } from '@mui/material';
+import { Container, Box } from '@mui/material';
 
-const LoginPage = ({ supabase }) => {
+const LoginPage = () => {
     return (
         <Container component="main" maxWidth="xs">
             <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <Typography variant="h5">Login</Typography>
-                <LoginForm supabase={supabase} />
+                <LoginForm />
             </Box>
         </Container>
     );
