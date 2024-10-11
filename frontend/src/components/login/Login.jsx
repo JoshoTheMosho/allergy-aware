@@ -33,6 +33,46 @@ const LoginForm = () => {
         window.location.href = '/search'; // Redirect after successful login
     };
 
+    const token = localStorage.getItem('access_token');
+
+    if (token) {
+        return (
+            <Box
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    maxWidth: 400,
+                    mx: 'auto',
+                    p: 2,
+                    border: '1px solid',
+                    borderColor: 'grey.400',
+                    borderRadius: 2,
+                    boxShadow: 2,
+                    mt: 5,
+                }}
+            >
+                <Typography variant="h5" component="h1" gutterBottom sx={{ mb: 3 }}>
+                    Already logged in
+                </Typography>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    fullWidth
+                    onClick={() => {
+                        localStorage.removeItem('access_token');
+                        localStorage.removeItem('refresh_token');
+                        window.location.href = '/';
+                    }}
+                >
+                    Logout
+                </Button>
+            </Box>
+        )
+
+    }
+
     return (
         <Box
             sx={{

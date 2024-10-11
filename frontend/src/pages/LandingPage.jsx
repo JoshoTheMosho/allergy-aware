@@ -1,5 +1,5 @@
 import Landing from '../components/landing/Landing.jsx';
 
-const LandingPage = ({ supabase }) => <Landing />;
+const LandingPage = () => <Landing />;
 
 export default LandingPage;

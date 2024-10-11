@@ -3,6 +3,7 @@ import axios from 'axios';
 import SearchIngredients from '../components/searchIngredients/SearchIngredients';
 import { Grid2, Card, CardContent, Typography } from '@mui/material';
 import config from '../../config';
+import NotLoggedIn from '../components/common/NotLoggedIn';
 
 const SearchPage = () => {
     const [results, setResults] = useState([]);
@@ -51,6 +52,10 @@ const SearchPage = () => {
             console.error('An error occurred while fetching data:', err);
         }
     };
+
+    if (!localStorage.getItem('access_token')) {
+        return <NotLoggedIn />;
+    }
 
     return (
         <div>
