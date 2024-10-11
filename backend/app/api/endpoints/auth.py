@@ -5,7 +5,7 @@ from ...core.config import supabase
 router = APIRouter()
 
 @router.post("/login/")
-async def login_user(email: str = Body(...), password: str = Body(...)):
+def login_user(email: str = Body(...), password: str = Body(...)):
     """
     Authenticate a user and return access and refresh tokens along with user details.
 

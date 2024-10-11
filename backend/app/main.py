@@ -2,6 +2,7 @@ import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .api.router import api_router
+from fastapi.middleware.cors import CORSMiddleware
 
 # Create a new FastAPI instance with a custom title
 app = FastAPI(title="Allergy Management App")
@@ -17,7 +18,6 @@ if is_development:
         allow_methods=["*"],  # Allow all HTTP methods
         allow_headers=["*"],  # Allow all headers
     )
-
 
 # Include the API router to handle all the routes defined in the api_router
 app.include_router(api_router)

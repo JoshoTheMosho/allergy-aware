@@ -10,7 +10,7 @@ from ...schemas.restaurant import Restaurant
 router = APIRouter()
 
 @router.get("/search/", response_model=List[Dish])
-async def search_ingredients(query: str = Query(..., title="Query", description="Search by allergen or ingredient"), user=Depends(get_current_user)):
+def search_ingredients(query: str = Query(..., title="Query", description="Search by allergen or ingredient"), user=Depends(get_current_user)):
     """
     Search for dishes based on allergens or ingredients.
 
@@ -25,16 +25,19 @@ async def search_ingredients(query: str = Query(..., title="Query", description=
         HTTPException: If an error occurs while processing the request.
     """
     try:
-        
+
         # Step 1: Query the "user" table to get the associated restaurant_id for the current user
         user_result = supabase.table("users")\
             .select("restaurant_id")\
             .eq("id", user.user.id)\
-            .single()\
+            .maybe_single()\
             .execute()
 
+        print("User Result:", user_result.data)
 
         restaurant_id = user_result.data["restaurant_id"]
+
+        print("Restaurant ID:", restaurant_id)
 
         # Step 2: Query the Ingredients table based on the ingredient name or allergen
         ingredient_result = supabase.table("ingredients")\
@@ -48,6 +51,8 @@ async def search_ingredients(query: str = Query(..., title="Query", description=
         if not ingredients_data:
             return []
 
+        print("Ingredients Data:", ingredients_data)
+
         # Step 3: Get a list of ingredient names to find matching dishes
         ingredient_names = [ingredient['name'] for ingredient in ingredients_data]
 
@@ -58,8 +63,14 @@ async def search_ingredients(query: str = Query(..., title="Query", description=
             .eq("restaurant_id", restaurant_id)\
             .execute()
         
+        print("Ingredient Names:", ingredient_names)
+
         # Return the list of dishes if found, otherwise an empty list
         return [Dish(**dish) for dish in dish_result.data] if dish_result.data else []
+    
+    except HTTPException as http_exc:
+        # If an HTTPException is raised, re-raise it
+        raise http_exc
     
     except Exception as e:
         # Raise an HTTP 500 error if an exception occurs
