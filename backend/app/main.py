@@ -18,6 +18,16 @@ if is_development:
         allow_methods=["*"],  # Allow all HTTP methods
         allow_headers=["*"],  # Allow all headers
     )
+else:
+    frontend_url = os.getenv("FRONTEND_URL")
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=[frontend_url],  # Allow your frontend URL only
+        allow_credentials=True,
+        allow_methods=["*"],  # Allow all HTTP methods
+        allow_headers=["*"],  # Allow all headers
+    )
 
 # Include the API router to handle all the routes defined in the api_router
 app.include_router(api_router)

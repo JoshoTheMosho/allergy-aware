@@ -1,6 +1,8 @@
 # Use the official Python image as the base
 FROM python:3.11
 
+ARG FRONTEND_URL
+
 # Set the working directory inside the container
 WORKDIR /code
 
