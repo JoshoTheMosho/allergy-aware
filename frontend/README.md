@@ -33,11 +33,10 @@ The Allergy Management App is designed to help users manage and track allergens 
 
 4. Set up environment variables:
 
-    Create a `.env` file in the root directory and add your Supabase URL and key:
+    Create a `.env` file in the root directory and add your backend URL:
 
     ```env
-    SUPABASE_URL=your_supabase_url
-    SUPABASE_KEY=your_supabase_key
+    VITE_BACKEND_URL=http://localhost:8000
     ```
 
 5. Run the React application:
@@ -78,6 +77,9 @@ allergy-aware/
 │   │   ├── App.css
 │   │   ├── App.jsx
 │   │   ├── main.jsx
+│   ├── .env
+│   ├── config.js
+│   ├── Dockerfile
 │   ├── eslint.config.js
 │   ├── index.html
 │   ├── package-lock.json
@@ -85,7 +87,9 @@ allergy-aware/
 │   ├── README.md
 │   ├── vite.config.js
 ├── backend/
+│   ├── .env
 │   ├── README.md/
 │   ├── ...
 ├── .gitignore
+├── docker-compose.yml
 ├── README.md

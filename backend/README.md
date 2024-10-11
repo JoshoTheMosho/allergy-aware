@@ -40,11 +40,12 @@ The Allergy Management App is designed to help users manage and track allergens 
 
 4. Set up environment variables:
 
-    Create a `.env` file in the root directory and add your Supabase URL and key:
+    Create a `.env` file in the root directory and add your Supabase URL and key and set development modew:
 
     ```env
     SUPABASE_URL=your_supabase_url
     SUPABASE_KEY=your_supabase_key
+    ENVIRONMENT=development
     ```
 
 5. Run the FastAPI application:
@@ -61,11 +62,11 @@ The Allergy Management App is designed to help users manage and track allergens 
 allergy-management-app/
 ├── app/
 │   ├── api/
+│   │   ├── dependencies/
+│   │   │   ├── get_user.py
 │   │   ├── endpoints/
 │   │   │   ├── allergens.py
 │   │   │   ├── auth.py
-│   │   ├── dependencies/
-│   │   │   ├── get_user.py
 │   │   ├── router.py
 │   ├── core/
 │   │   ├── config.py
@@ -75,5 +76,6 @@ allergy-management-app/
 │   │   ├── restaurant.py
 │   ├── main.py
 ├── .env
-├── requirements.txt
+├── Dockerfile
 ├── README.md
+├── requirements.txt
