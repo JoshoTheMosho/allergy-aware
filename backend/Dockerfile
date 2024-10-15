@@ -1,6 +1,10 @@
 # Use the official Python image as the base
 FROM python:3.11
 
+# URLs from Railway
+ARG SUPABASE_URL
+ARG SUPABASE_KEY
+
 # Set the working directory inside the container
 WORKDIR /code
 
