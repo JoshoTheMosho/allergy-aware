@@ -19,10 +19,7 @@ if is_development:
         allow_headers=["*"],  # Allow all headers
     )
 else:
-    frontend_url = os.getenv("FRONTEND_URL")
-
-    print(is_development)
-    print(frontend_url)
+    frontend_url = os.getenv("FRONTEND_URL", default="")
 
     app.add_middleware(
         CORSMiddleware,

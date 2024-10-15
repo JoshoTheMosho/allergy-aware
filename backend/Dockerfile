@@ -1,7 +1,9 @@
 # Use the official Python image as the base
 FROM python:3.11
 
-ARG FRONTEND_URL
+# URLs from Railway
+ARG SUPABASE_URL
+ARG SUPABASE_KEY
 
 # Set the working directory inside the container
 WORKDIR /code
@@ -19,4 +21,4 @@ COPY . .
 EXPOSE 8000
 
 # Command to run the application
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--proxy-headers"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
