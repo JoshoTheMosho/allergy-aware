@@ -14,12 +14,12 @@ const Footer = () => {
             }}
         >
             <Container>
-                {/* <Typography variant="body1">
+                <Typography variant="body1">
                     © {new Date().getFullYear()} AllergyApp. All rights reserved.
                 </Typography>
                 <Typography variant="body2">
                     <a href="/privacy" style={{ color: 'white', textDecoration: 'none' }}>Privacy Policy</a> | <a href="/terms" style={{ color: 'white', textDecoration: 'none' }}>Terms of Service</a>
-                </Typography> */}
+                </Typography>
             </Container>
         </Box>
     );

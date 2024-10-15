@@ -3,10 +3,13 @@ import axios from 'axios';
 import SearchIngredients from '../components/searchIngredients/SearchIngredients';
 import { Grid2, Card, CardContent, Typography } from '@mui/material';
 import config from '../../config';
+import NotLoggedIn from '../components/common/NotLoggedIn';
 
 const SearchPage = () => {
     const [results, setResults] = useState([]);
     const [token, setToken] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [hasSearched, setHasSearched] = useState(false);
 
     // Hardcode the token you retrieved from Postman
     //const token = 'Bearer token';
@@ -35,6 +38,10 @@ const SearchPage = () => {
             return;
         }
 
+        setResults([]);
+        setLoading(true);
+        setHasSearched(true);
+
         try {
             const response = await axios.get(`${config.backendUrl}/allergens/search/`, {
                 headers: {
@@ -49,12 +56,18 @@ const SearchPage = () => {
             setResults(response.data);
         } catch (err) {
             console.error('An error occurred while fetching data:', err);
+        } finally {
+            setLoading(false);
         }
     };
 
+    if (!localStorage.getItem('access_token')) {
+        return <NotLoggedIn />;
+    }
+
     return (
         <div>
-            <SearchIngredients onSearch={handleSearch} />
+            <SearchIngredients onSearch={handleSearch} loading={loading} />
             {/* Display search results */}
             <div style={{ marginTop: '20px' }}>
                 {results.length > 0 ? (
@@ -75,9 +88,11 @@ const SearchPage = () => {
                         ))}
                     </Grid2>
                 ) : (
-                    <Typography variant="body1" color="textSecondary" style={{ textAlign: 'center', marginTop: '20px' }}>
-                        No results found.
-                    </Typography>
+                    hasSearched && !loading && (
+                        <Typography variant="body1" color="textSecondary" style={{ textAlign: 'center', marginTop: '20px' }}>
+                            No results found.
+                        </Typography>
+                    )
                 )}
             </div>
         </div>

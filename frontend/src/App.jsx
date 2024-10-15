@@ -5,6 +5,7 @@ import SearchPage from './pages/SearchPage';
 import EditPage from './pages/EditPage';
 import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
+import ComingSoon from './components/common/ComingSoon';
 import './App.css';
 
 function App() {
@@ -16,6 +17,11 @@ function App() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/search" element={<SearchPage />} />
                 <Route path="/edit" element={<EditPage />} />
+                <Route path="/profile" element={<ComingSoon />} />
+                <Route path="/edit" element={<ComingSoon />} />
+                <Route path="/help" element={<ComingSoon />} />
+                <Route path="/privacy" element={<ComingSoon />} />
+                <Route path="/terms" element={<ComingSoon />} />
             </Routes>
             <Footer />
         </Router>
