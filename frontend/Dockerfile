@@ -16,11 +16,5 @@ COPY . .
 # Build the React app for production
 RUN npm run build
 
-# Copy the build output to the NGINX html directory
-COPY --from=build /code/dist /usr/share/nginx/html
-
-# Expose port 80
-EXPOSE 80
-
-# Start NGINX
-CMD ["nginx", "-g", "daemon off;"]
+# Start 
+CMD ["npx", "serve", "-s", "dist", "-l", "3000"]
