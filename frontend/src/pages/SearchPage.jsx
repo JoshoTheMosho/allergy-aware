@@ -43,7 +43,7 @@ const SearchPage = () => {
         setHasSearched(true);
 
         try {
-            const response = await axios.get(`http://${config.backendUrl}/allergens/search/`, {
+            const response = await axios.get(`${config.backendUrl}/allergens/search/`, {
                 headers: {
                     Authorization: `Bearer ${token}` //token
                 },
