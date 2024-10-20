@@ -14,7 +14,7 @@ const LoginForm = () => {
         setLoading(true);
 
         try {
-            const response = await fetch(`${config.backendUrl}/auth/login`, {
+            const response = await fetch(`${config.backendUrl}/auth/login/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
