@@ -21,6 +21,8 @@ if is_development:
 else:
     frontend_url = os.getenv("FRONTEND_URL", default="")
 
+    print(f"Allowing frontend URL: {frontend_url}")
+
     app.add_middleware(
         CORSMiddleware,
         allow_origins=[frontend_url],  # Allow your frontend URL only
