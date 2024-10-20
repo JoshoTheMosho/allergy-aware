@@ -1,7 +1,7 @@
 # Stage 1: Build the React app
 FROM node:20 AS build
 
-# Set the environment variables we want to access
+# URLs from Railway
 ARG VITE_BACKEND_URL
 
 # Set the working directory inside the container
@@ -19,14 +19,5 @@ COPY . .
 # Build the React app for production
 RUN npm run build
 
-# Stage 2: Serve the built app using a lightweight web server
-FROM nginx:alpine
-
-# Copy the build output to the NGINX html directory
-COPY --from=build /code/dist /usr/share/nginx/html
-
-# Expose port 80
-EXPOSE 80
-
-# Start NGINX
-CMD ["nginx", "-g", "daemon off;"]
+# Start 
+CMD ["npx", "serve", "-s", "dist", "-l", "3000"]

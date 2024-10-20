@@ -5,6 +5,11 @@ from ..dependencies.get_user import get_current_user
 from ...schemas.dish import Dish
 from ...schemas.ingredient import Ingredient
 from ...schemas.restaurant import Restaurant
+import logging
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Create a new APIRouter instance
 router = APIRouter()
@@ -32,12 +37,12 @@ def search_ingredients(query: str = Query(..., title="Query", description="Searc
             .eq("id", user.user.id)\
             .execute()
 
-        print("User Result:", user_result.data)
+        logger.info("User Result:", user_result.data)
 
         #restaurant_id = user_result.data["restaurant_id"]
         restaurant_id = user_result.data[0]['restaurant_id']
 
-        print("Restaurant ID:", restaurant_id)
+        logger.info("Restaurant ID:", restaurant_id)
 
         # Step 2: Query the Ingredients table based on the ingredient name or allergen
         ingredient_result = supabase.table("ingredients")\
@@ -51,7 +56,7 @@ def search_ingredients(query: str = Query(..., title="Query", description="Searc
         if not ingredients_data:
             return []
 
-        print("Ingredients Data:", ingredients_data)
+        logger.info("Ingredients Data:", ingredients_data)
 
         # Step 3: Get a list of ingredient names to find matching dishes
         ingredient_names = [ingredient['name'] for ingredient in ingredients_data]
@@ -63,7 +68,7 @@ def search_ingredients(query: str = Query(..., title="Query", description="Searc
             .eq("restaurant_id", restaurant_id)\
             .execute()
         
-        print("Ingredient Names:", ingredient_names)
+        logger.info("Ingredient Names:", ingredient_names)
 
         # Return the list of dishes if found, otherwise an empty list
         return [Dish(**dish) for dish in dish_result.data] if dish_result.data else []

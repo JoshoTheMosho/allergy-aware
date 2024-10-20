@@ -3,7 +3,7 @@ from ...core.config import supabase
 from fastapi.security import OAuth2PasswordBearer
 
 # Define the OAuth2 scheme for token authentication
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login/")
 
 def get_current_user(token: str = Depends(oauth2_scheme)):
     """
