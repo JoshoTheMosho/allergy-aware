@@ -13,28 +13,34 @@ const LoginForm = () => {
         setError('');
         setLoading(true);
 
-        const response = await fetch(`${config.backendUrl}/auth/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ "email": email, "password": password }),
-        });
+        try {
+            const response = await fetch(`${config.backendUrl}/auth/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ "email": email, "password": password }),
+            });
 
-        setLoading(false);
+            if (!response.ok) {
+                setError("Incorrect email or password.");
+                return;
+            }
 
-        if (!response.ok) {
-            setError("Incorrect email or password.");
-            return;
+            const data = await response.json();
+
+            localStorage.setItem('access_token', data.response.session.access_token);
+            localStorage.setItem('refresh_token', data.response.session.refresh_token);
+
+            // Redirect to the search page or handle login success
+            window.location.href = '/search'; // Redirect after successful login
+
+        } catch (err) {
+            console.error('An error occurred while fetching data:', err);
+            setError("Authentication server error.");
+        } finally {
+            setLoading(false);
         }
-
-        const data = await response.json();
-
-        localStorage.setItem('access_token', data.response.session.access_token);
-        localStorage.setItem('refresh_token', data.response.session.refresh_token);
-
-        // Redirect to the search page or handle login success
-        window.location.href = '/search'; // Redirect after successful login
     };
 
     const token = localStorage.getItem('access_token');

@@ -1,6 +1,11 @@
 from fastapi import APIRouter, HTTPException, Body
 from supabase import AuthApiError
 from ...core.config import supabase
+import logging
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
@@ -34,7 +39,7 @@ def login_user(email: str = Body(...), password: str = Body(...)):
         raise HTTPException(status_code=401, detail="Invalid email or password.") 
     except Exception as e:
         # For other unexpected errors, raise a 500 Internal Server Error
-        print(e)
+        logger.info(e)
         raise HTTPException(status_code=500, detail="An internal server error occurred.")
     
 

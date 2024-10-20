@@ -2,16 +2,27 @@ import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .api.router import api_router
-from fastapi.middleware.cors import CORSMiddleware
+import logging
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Create a new FastAPI instance with a custom title
 app = FastAPI(title="Allergy Management App")
+
+# Log environment variables
+environment = os.getenv("ENVIRONMENT")
+frontend_url = os.getenv("FRONTEND_URL", default="")
+
+logger.info(f"ENVIRONMENT variable: {environment}")
+logger.info(f"FRONTEND_URL variable: {frontend_url}")
 
 # Set up the environment variable for development
 is_development = os.getenv("ENVIRONMENT") == "development"
 
 if is_development:
-    print("Is development!")
+    logger.info("Development mode active.")
 
     app.add_middleware(
         CORSMiddleware,
@@ -21,9 +32,7 @@ if is_development:
         allow_headers=["*"],  # Allow all headers
     )
 else:
-    frontend_url = os.getenv("FRONTEND_URL", default="")
-
-    print(f"Allowing frontend URL: {frontend_url}")
+    logger.info(f"Production mode. Allowing frontend URL: {frontend_url}")
 
     app.add_middleware(
         CORSMiddleware,

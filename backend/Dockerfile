@@ -6,6 +6,11 @@ ARG FRONTEND_URL
 ARG SUPABASE_URL
 ARG SUPABASE_KEY
 
+# Set the environment variables
+ENV FRONTEND_URL=$FRONTEND_URL
+ENV SUPABASE_URL=$SUPABASE_URL
+ENV SUPABASE_KEY=$SUPABASE_KEY
+
 # Set the working directory inside the container
 WORKDIR /code
 
