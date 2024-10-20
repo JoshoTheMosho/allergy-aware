@@ -45,7 +45,7 @@ const LoginForm = () => {
 
     const token = localStorage.getItem('access_token');
 
-    if (token) {
+    if (token && window.location.href !== '/search') {
         return (
             <Box
                 sx={{
@@ -64,8 +64,19 @@ const LoginForm = () => {
                 }}
             >
                 <Typography variant="h5" component="h1" gutterBottom sx={{ mb: 3 }}>
-                    {window.location.href !== '/search' ? "Already logged in" : "Successfully logged in!"}
+                    Already logged in
                 </Typography>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    fullWidth
+                    onClick={() => {
+                        window.location.href = '/search';
+                    }}
+                >
+                    Search
+                </Button>
+
                 <Button
                     variant="contained"
                     color="primary"
