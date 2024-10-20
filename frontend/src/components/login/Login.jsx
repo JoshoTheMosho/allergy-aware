@@ -64,7 +64,7 @@ const LoginForm = () => {
                 }}
             >
                 <Typography variant="h5" component="h1" gutterBottom sx={{ mb: 3 }}>
-                    Already logged in
+                    {window.location.href !== '/search' ? "Already logged in" : "Successfully logged in!"}
                 </Typography>
                 <Button
                     variant="contained"
