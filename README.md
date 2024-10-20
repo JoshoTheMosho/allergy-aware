@@ -1,7 +1,7 @@
 # Allergenie
 **Production:** [https://allergenie.up.railway.app/](https://allergenie.up.railway.app/)  
 **Development:** [https://allergenie-dev.up.railway.app/](https://allergenie-dev.up.railway.app/)  
-**Vercel Deployments:** [https://railway.app/project/1627eb04-2e6e-4749-b8f1-85878ff99681](https://railway.app/project/1627eb04-2e6e-4749-b8f1-85878ff99681)
+**Railway Deployments:** [https://railway.app/project/1627eb04-2e6e-4749-b8f1-85878ff99681](https://railway.app/project/1627eb04-2e6e-4749-b8f1-85878ff99681)
 
 ### Features
 **Implemented**:
