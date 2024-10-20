@@ -11,6 +11,8 @@ app = FastAPI(title="Allergy Management App")
 is_development = os.getenv("ENVIRONMENT") == "development"
 
 if is_development:
+    print("Is development!")
+
     app.add_middleware(
         CORSMiddleware,
         allow_origins=["http://localhost:5173"],  # Allow your frontend URL only in development
